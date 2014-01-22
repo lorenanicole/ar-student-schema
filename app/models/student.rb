@@ -1,5 +1,39 @@
 require_relative '../../db/config'
 
 class Student < ActiveRecord::Base
-# implement your Student model here
+
+  validates :email, :format => { :with => /.+@\w+\.\w{2,4}/ }, 
+            :uniqueness => true
+            # (510) 555-1212 x4567
+  validates :phone, :format => { :with => /\(\d{3}\) \d{3}-\d{4} x\d{4}/ }
+  validates :age, :numericality => { :greater_than => 5 }
+  # validate :not_a_youngin
+
+
+
+  def name
+    "#{self[:first_name]} #{self[:last_name]}" 
+  end
+
+  def age
+    birthday_to_age(self[:birthday])
+  end
+
+  def not_a_youngin
+    unless age > 5
+      errors.add(:age, "must not be less that 6")
+    end
+
+    ## record.errors.full_message record is the active record object
+  end
+
+  private
+
+  def birthday_to_age(birthday)
+    now = Time.now.utc.to_date
+    now.year - birthday.year - ((now.month > birthday.month || (now.month == birthday.month && now.day >= birthday.day)) ? 0 : 1)
+  end
+
 end
+
+name_test = Student.new.name
