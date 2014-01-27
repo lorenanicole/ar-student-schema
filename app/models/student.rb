@@ -1,11 +1,12 @@
 require_relative '../../db/config'
 require_relative 'person'
 require_relative 'assignment'
+require_relative 'teacher'
 
 class Student < Person
 
-  has_many :associations, :foreign_key => :student_id
-  has_many :teachers, :through => :associations
+  has_many :assignments, :foreign_key => :student_id
+  has_many :teachers, through: :assignments
 
   # belongs_to :person
 
@@ -34,10 +35,10 @@ class Student < Person
   #   ## record.errors.full_message record is the active record object
   # end
 
-  def set_teacher_id
-    Assignment.create(:teacher_id => ((self.id % 9) + 1), :student_id => self.id)
-    # self.teacher_id = (self.id % 9) + 1
-  end
+  # def set_teacher_id
+  #   Assignment.create(:teacher_id => ((self.id % 9) + 1), :student_id => self.id)
+  #   # self.teacher_id = (self.id % 9) + 1
+  # end
 
   private
 
