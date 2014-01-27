@@ -1,11 +1,10 @@
 require_relative '../../db/config'
-require_relative 'person'
 require_relative 'assignment'
 require_relative 'teacher'
 
-class Student < Person
+class Student < ActiveRecord::Base
 
-  has_many :assignments, :foreign_key => :student_id
+  has_many :assignments
   has_many :teachers, through: :assignments
 
   # belongs_to :person

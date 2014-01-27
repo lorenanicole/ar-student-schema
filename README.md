@@ -12,13 +12,14 @@ To get started:
 
 To populate the final assignments table with student and teacher assignments follow these steps --
 
-1. Remove the migration '201301261842_update_assignments.rb' from migrations
+1. Remove the migration 201301261842_update_students.rb' & '201301261933_update_assignments.rb' from migrations
 2. Run rake db:create
 3. Run rake db:migrate
 4. Run rake db:populate
-5. Move '201301261842_update_assignments.rb' back into the migrations folder and execute run rake db:create
+5. Move '201301261842_update_students.rb' back into the migrations folder and execute run rake db:migrate
+6. Move '201301261933_update_assignments.rb' back into the migrations folder and execute run rake db:migrate
 
 The migrations are out of sync with the rake task populate since the last migration is more or less a "task" that modifies the data (and not the schema as traditional migrations do).
 
-Ergo, you have to tweak the process to accomplish the assignments of teachers to students!
+Ergo, you have to tweak the process to accomplish the concatenation of name data and the assignments of teachers to students!
 
