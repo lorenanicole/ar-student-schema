@@ -11,10 +11,11 @@ class UpdateAssignments < ActiveRecord::Migration
     puts t_id
 
     Student.all.each do |s|
-      puts ----
-      p s.id
-      puts ---
-      Assignment.create(:student_id => s.id, :teacher_id => t_id.sample)
+      puts "----"
+      puts s.id
+      puts "---"
+      puts t_id.sample
+      Assignment.create(:student_id => s.id, :teacher_id => t_id.sample.id)
     end
 
   end
